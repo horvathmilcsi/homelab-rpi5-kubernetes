@@ -1,6 +1,6 @@
 ---
 - name: Bootstrap Raspberry Pi for k3s
-  hosts: raspberrypi
+  hosts: localhost
   become: yes
   roles:
     - common   # (Optional) OS updates, SSH, etc.

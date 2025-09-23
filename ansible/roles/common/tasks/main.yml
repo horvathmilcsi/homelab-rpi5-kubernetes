@@ -8,8 +8,3 @@
     name: mc
     state: present
 
-- name: Ensure user 'pi' has authorized SSH key
-  authorized_key:
-    user: pi
-    state: present
-    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

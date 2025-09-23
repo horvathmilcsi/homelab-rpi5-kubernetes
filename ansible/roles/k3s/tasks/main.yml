@@ -4,21 +4,29 @@
     name: curl
     state: present
 
+- name: Install required tools
+  apt:
+    name:
+      - iptables
+      - iptables-persistent
+    state: present
+
+- name:  IMPORTANT edit cmdline.txt manually
+  debug:
+    msg: Manual action required | Run this command | sudo nano /boot/firmware/cmdline.txt | Then append the following text to the end of the line | cgroup_memory=1 cgroup_enable=memory | Finally, reboot your Raspberry Pi 5 
+
 - name: Install k3s
   shell: |
-    curl -sfL https://get.k3s.io | sh -
+    curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644" bash -
   args:
     creates: /usr/local/bin/k3s
 
-- name: Fetch kubeconfig to control node
-  fetch:
-    src: /etc/rancher/k3s/k3s.yaml
-    dest: ./kubeconfig
-    flat: yes
+- name: Let's try the first ever kubernetes command
+  ansible.builtin.command: kubectl get nodes
+  register: nodes_output
 
-- name: Print info
-  debug:
-    msg: |
-      k3s installed! Use the fetched kubeconfig to access your cluster.
-      Next step: Bootstrap FluxCD or your preferred GitOps tool.
+- name: If you see green text in this section that's very good news
+  ansible.builtin.debug:
+    var: nodes_output.stdout
+
 
