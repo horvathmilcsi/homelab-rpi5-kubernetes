@@ -1,0 +1,24 @@
+---
+- name: Install dependencies
+  apt:
+    name: curl
+    state: present
+
+- name: Install k3s
+  shell: |
+    curl -sfL https://get.k3s.io | sh -
+  args:
+    creates: /usr/local/bin/k3s
+
+- name: Fetch kubeconfig to control node
+  fetch:
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: ./kubeconfig
+    flat: yes
+
+- name: Print info
+  debug:
+    msg: |
+      k3s installed! Use the fetched kubeconfig to access your cluster.
+      Next step: Bootstrap FluxCD or your preferred GitOps tool.
+

@@ -1,0 +1,7 @@
+---
+- name: Bootstrap Raspberry Pi for k3s
+  hosts: raspberrypi
+  become: yes
+  roles:
+    - common   # (Optional) OS updates, SSH, etc.
+    - k3s      # Installs k3s and fetches kubeconfig
