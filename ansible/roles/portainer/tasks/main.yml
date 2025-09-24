@@ -1,0 +1,15 @@
+- name: Add Portainer Helm repository
+  command: helm repo add portainer https://portainer.github.io/k8s/
+  register: add_repo_result
+  changed_when: "'\"has been added\"' in add_repo_result.stdout"
+
+- name: Update Helm repositories
+  command: helm repo update
+
+- name: Install or upgrade Portainer using Helm
+  command: >
+    helm upgrade --install portainer portainer/portainer
+    --namespace portainer
+    --create-namespace
+    --set service.type=LoadBalancer
+    --set image.tag=lts

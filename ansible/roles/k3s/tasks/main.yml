@@ -16,6 +16,24 @@
   args:
     creates: /usr/local/bin/k3s
 
+- name: Ensure .kube directory exists for original user
+  file:
+    path: "/home/{{ ansible_env.SUDO_USER }}/.kube"
+    state: directory
+    owner: "{{ ansible_env.SUDO_USER }}"
+    group: "{{ ansible_env.SUDO_USER }}"
+    mode: '0755'
+
+- name: Create symlink to k3s kubeconfig
+  file:
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: "/home/{{ ansible_env.SUDO_USER }}/.kube/config"
+    state: link
+    force: yes
+    owner: "{{ ansible_env.SUDO_USER }}"
+    group: "{{ ansible_env.SUDO_USER }}"
+
+
 - name: Let's try the first ever kubernetes command
   ansible.builtin.command: kubectl get nodes
   register: nodes_output
