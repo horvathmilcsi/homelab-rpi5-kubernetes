@@ -48,29 +48,29 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 - [x] K3s installed (with dependencies)
 
 ## repo structure
-:~/repos/homelab-rpi5-kubernetes $ tree
-.
-├── 1_bootstrap_linux
-│   ├── 1_start_wsl_ubuntu.bat
-│   └── 2_install_ansible.sh
-├── ansible
-│   ├── 9_start_ansible_bootstrap.sh
-│   ├── ansible.cfg
-│   ├── inventory
-│   │   └── hosts.ini
-│   ├── playbooks
-│   │   └── bootstrap.yml
-│   └── roles
-│       ├── common
-│       │   └── tasks
-│       │       └── main.yml
-│       ├── k3s
-│       │   └── tasks
-│       │       └── main.yml
-│       └── set_replace_key_value
-│           └── tasks
-│               └── main.yml
-└── README.md
+:~/repos/homelab-rpi5-kubernetes $ tree  
+.  
+├── 1_bootstrap_linux  
+│   ├── 1_start_wsl_ubuntu.bat  
+│   └── 2_install_ansible.sh  
+├── ansible  
+│   ├── 9_start_ansible_bootstrap.sh  
+│   ├── ansible.cfg  
+│   ├── inventory  
+│   │   └── hosts.ini  
+│   ├── playbooks  
+│   │   └── bootstrap.yml  
+│   └── roles  
+│       ├── common  
+│       │   └── tasks  
+│       │       └── main.yml  
+│       ├── k3s  
+│       │   └── tasks  
+│       │       └── main.yml  
+│       └── set_replace_key_value  
+│           └── tasks  
+│               └── main.yml  
+└── README.md  
 
 ## Coming soon
 - Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
