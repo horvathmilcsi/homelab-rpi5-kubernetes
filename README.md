@@ -11,7 +11,7 @@ My kubernetes homelab for my Raspberry pi 5
 
 ## How to use
 1) ssh into your rpi5
-2) run this script:
+2) run this script (you can run it multiple times, since it is idempotent):
 ```bash
 sudo apt update  ### If at some point you will be asked to decide between Yes/No/xyz, choose Yes :)
 sudo apt -y install git
@@ -27,8 +27,8 @@ cd ansible/
 ```bash
 sudo reboot
 ```
-5) after reboot, ssh into your rpi5
-6) execute this command:
+4) after reboot, ssh into your rpi5
+5) execute this command:
 ```bash
 kubectl get nodes   ### this should give an output and no errors
 ```
@@ -38,7 +38,7 @@ kubectl get nodes
 NAME            STATUS   ROLES                  AGE   VERSION
 raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 ```
-7) Enjoy your brand new Kubernetes 'cluster' :)
+6) Enjoy your brand new Kubernetes 'cluster' :)
 
 ## Checklist
 - [x] Linux OS installed on RPi5
