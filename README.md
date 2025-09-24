@@ -6,12 +6,14 @@ My kubernetes homelab for my Raspberry pi 5
 2) Install K3S Kubernetes Rpi5 (via Ansible)
 
 ## Prerequisites  
-1) have a linux OS on your Raspberry Pi 5 (I tested with Raspberr Pi OS, that is a Debian GNU/Linux 12 bookworm under the hood)
+1) have a linux OS on your Raspberry Pi 5 (I tested with Raspberry Pi OS, that is a Debian GNU/Linux 12 bookworm under the hood)
 
 ## How to use
 1) ssh into your rpi5
 2) run this script:
 ```bash
+sudo apt update  ### If at some point you will be asked to decide between Yes/No/xyz, choose Yes :)
+sudo apt -y install git
 mkdir ~/repos/   ###  Create a new parent folder for this git repo
 cd ~/repos/
 git clone https://github.com/horvathmilcsi/homelab-rpi5-kubernetes.git
@@ -20,7 +22,7 @@ cd homelab-rpi5-kubernetes/
 cd ansible/
 ./9_start_ansible_bootstrap.sh   ### this will install k3s and all its dependencies and configs via Ansible
 ```
-3) if no errors shown, restart your rpi5 by the next command. If errors, then fix the errors first
+3) if no errors shown, restart your rpi5 via the next command. If errors, then fix the errors first
 ```bash
 sudo reboot
 ```
@@ -35,7 +37,7 @@ kubectl get nodes
 NAME            STATUS   ROLES                  AGE   VERSION
 raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 ```
-
+7) Enjoy your brand new Kubernetes 'cluster' :)
 
 
 
