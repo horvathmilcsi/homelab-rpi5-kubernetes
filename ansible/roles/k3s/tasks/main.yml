@@ -1,4 +1,3 @@
----
 - name: Install dependencies
   apt:
     name: curl
@@ -10,10 +9,6 @@
       - iptables
       - iptables-persistent
     state: present
-
-- name:  IMPORTANT edit cmdline.txt manually
-  debug:
-    msg: Manual action required | Run this command | sudo nano /boot/firmware/cmdline.txt | Then append the following text to the end of the line | cgroup_memory=1 cgroup_enable=memory | Finally, reboot your Raspberry Pi 5 
 
 - name: Install k3s
   shell: |

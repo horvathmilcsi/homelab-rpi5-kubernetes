@@ -1,0 +1,62 @@
+- name: Set or replace keyword in a text file with a new keyword=value pair
+  become: true
+  shell: |
+    #!/bin/bash
+
+    CMDLINE_FILE="{{ cmdline_file }}"
+    KEYWORD="{{ original_keyword }}"
+    REPLACEMENT="{{ replacement_value }}"
+
+    echo "Check if the $CMDLINE_FILE file exists"
+    if [[ ! -f "$CMDLINE_FILE" ]]; then
+      echo "Error: $CMDLINE_FILE not found."
+      exit 1
+    fi
+
+    # Read the first line
+    FIRST_LINE=$(head -n 1 "$CMDLINE_FILE")
+
+    echo "Check if $REPLACEMENT already exists"
+    if [[ "$FIRST_LINE" == *"$REPLACEMENT"* ]]; then
+      echo "$REPLACEMENT already exist in cmdline_file, so no changes needed"
+      exit 0
+    fi
+
+    echo "create beackup copy from $CMDLINE_FILE"
+    TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+    BACKUP_FILE="${CMDLINE_FILE}.bak${TIMESTAMP}"
+    cp "$CMDLINE_FILE" "$BACKUP_FILE"
+
+
+    echo "Check if the keyword exists"
+    if [[ "$FIRST_LINE" == *"$KEYWORD"* ]]; then
+      echo "Remove the keyword and value as well"
+      FIRST_LINE=$(echo "$FIRST_LINE" | sed -E "s/$KEYWORD=[^ ]* ?//g")
+      echo "the FIRST_LINE variable is:$FIRST_LINE"
+    fi
+
+    echo "Append the replacement before EOL"
+    MODIFIED_LINE="$FIRST_LINE $REPLACEMENT"
+
+    echo "Replace the first line in the file"
+    sed -i "1s|.*|$MODIFIED_LINE|" "$CMDLINE_FILE"
+
+    echo "Updated cmdline.txt successfully."
+    echo "cmdline.txt contents:"
+    cat "$CMDLINE_FILE"
+  args:
+    executable: /bin/bash
+  register: script_output
+
+###
+
+- name: Show full script output
+  debug:
+    msg: |
+      STDOUT:
+      {{ script_output.stdout }}
+
+      STDERR:
+      {{ script_output.stderr }}
+
+

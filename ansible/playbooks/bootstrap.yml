@@ -1,7 +1,24 @@
----
 - name: Bootstrap Raspberry Pi for k3s
   hosts: localhost
   become: yes
+  vars:
+    cmdline_file: "/boot/firmware/cmdline.txt"
+
+  pre_tasks:
+    - name: Set or replace cgroup_memory=1
+      include_role:
+        name: set_replace_key_value
+      vars:
+        original_keyword: "cgroup_memory"
+        replacement_value: "cgroup_memory=1"
+
+    - name: Set or replace cgroup_enable=memory
+      include_role:
+        name: set_replace_key_value
+      vars:
+        original_keyword: "cgroup_enable"
+        replacement_value: "cgroup_enable=memory"
+
   roles:
     - common   # OS updates, install Midnight Commander
-    - k3s      # Install k3s (!without editing /boot/firmware/cmdline.txt !)
+    - k3s      # Install k3s
