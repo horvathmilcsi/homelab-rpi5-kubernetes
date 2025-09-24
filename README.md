@@ -6,7 +6,8 @@ My kubernetes homelab for my Raspberry pi 5
 2) Install K3S Kubernetes Rpi5 (via Ansible)
 
 ## Prerequisites  
-1) have a linux OS on your Raspberry Pi 5 (I tested with Raspberry Pi OS, that is a Debian GNU/Linux 12 bookworm under the hood)
+1) have an installed linux OS on your Raspberry Pi 5, with SSH access enabled
+(I tested with Raspberry Pi OS, that is a Debian GNU/Linux 12 bookworm under the hood)
 
 ## How to use
 1) ssh into your rpi5
@@ -39,5 +40,41 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 ```
 7) Enjoy your brand new Kubernetes 'cluster' :)
 
+## Checklist
+- [x] Linux OS installed on RPi5
+- [x] SSH access works
+- [x] Git repo cloned
+- [x] Ansible installed (with dependencies)
+- [x] K3s installed (with dependencies)
+
+## repo structure
+:~/repos/homelab-rpi5-kubernetes $ tree
+.
+├── 1_bootstrap_linux
+│   ├── 1_start_wsl_ubuntu.bat
+│   └── 2_install_ansible.sh
+├── ansible
+│   ├── 9_start_ansible_bootstrap.sh
+│   ├── ansible.cfg
+│   ├── inventory
+│   │   └── hosts.ini
+│   ├── playbooks
+│   │   └── bootstrap.yml
+│   └── roles
+│       ├── common
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── k3s
+│       │   └── tasks
+│       │       └── main.yml
+│       └── set_replace_key_value
+│           └── tasks
+│               └── main.yml
+└── README.md
+
+## Coming soon
+- Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
+- GitOps deployment with FluxCD
+- Monitoring stack (Prometheus, Grafana)
 
 
