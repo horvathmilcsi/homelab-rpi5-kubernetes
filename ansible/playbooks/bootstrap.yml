@@ -3,5 +3,5 @@
   hosts: localhost
   become: yes
   roles:
-    - common   # (Optional) OS updates, SSH, etc.
-    - k3s      # Installs k3s and fetches kubeconfig
+    - common   # OS updates, install Midnight Commander
+    - k3s      # Install k3s (!without editing /boot/firmware/cmdline.txt !)
