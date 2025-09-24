@@ -47,7 +47,8 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 - [x] Ansible installed (with dependencies)
 - [x] K3s installed (with dependencies)
 
-## repo structure
+## Repo structure
+```bash
 :~/repos/homelab-rpi5-kubernetes $ tree  
 .  
 ├── 1_bootstrap_linux  
@@ -71,10 +72,12 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 │           └── tasks  
 │               └── main.yml  
 └── README.md  
+```
 
 ## Coming soon
+- Kubernetes manager tool (Portainer)
+- Monitoring stack (Prometheus, Grafana)
 - Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
 - GitOps deployment with FluxCD
-- Monitoring stack (Prometheus, Grafana)
 
 
