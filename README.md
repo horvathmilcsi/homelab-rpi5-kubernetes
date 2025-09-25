@@ -1,16 +1,23 @@
 # homelab-rpi5-kubernetes
-My kubernetes homelab for my Raspberry pi 5
+My kubernetes homelab for my Raspberry Pi 5
 
 ## Purpose  
-1) Install Ansible on Rpi5
-2) Install K3S Kubernetes Rpi5 (via Ansible)
+### Level 1:
+1) Install Ansible on Rpi5 (with dependencies)
+2) Install K3S Kubernetes Rpi5 (via Ansible, with dependencies)
+
+## Level 2:
+3) Install Helm - a package manager (via Ansible, with dependenices)
+4) Install k9s - a Kubernetes TUI management tool (via Ansible)
+5) Install Portainer - a Kubernetes management tool (via Ansible)
 
 ## Prerequisites  
 1) have an installed linux OS on your Raspberry Pi 5, with SSH access enabled
 (I tested with Raspberry Pi OS, that is a Debian GNU/Linux 12 bookworm under the hood)
 
 ## How to use
-1) ssh into your rpi5
+### Level 1 (Install Ansible + K3S)
+1) ssh into your PPi 5
 2) run this script (you can run it multiple times, since it is idempotent):
 ```bash
 sudo apt update  ### If at some point you will be asked to decide between Yes/No/xyz, choose Yes :)
@@ -21,14 +28,16 @@ git clone https://github.com/horvathmilcsi/homelab-rpi5-kubernetes.git
 cd homelab-rpi5-kubernetes/
 ./1_bootstrap_linux/2_install_ansible.sh   ### this will install Ansible
 cd ansible/
+./9_start_ansible_bootstrap.sh   ### this will perform a config on xxx.txt and then reboot your RPi 5
+```
+3) your RPi 5 will be rebooted (because of .txt changed) 
+4) after reboot, ssh into your RPi 5
+5) run this script (you can run it multiple times, since it is idempotent):
+```bash
+cd ~/repos/homelab-rpi5-kubernetes/ansible/
 ./9_start_ansible_bootstrap.sh   ### this will install k3s and all its dependencies and configs via Ansible
 ```
-3) if no errors shown, restart your rpi5 via the next command. If errors, then fix the errors first
-```bash
-sudo reboot
-```
-4) after reboot, ssh into your rpi5
-5) execute this command:
+6) execute this command:
 ```bash
 kubectl get nodes   ### this should give an output and no errors
 ```
@@ -38,14 +47,21 @@ kubectl get nodes
 NAME            STATUS   ROLES                  AGE   VERSION
 raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 ```
-6) Enjoy your brand new Kubernetes 'cluster' :)
+7) Enjoy your brand new Kubernetes 'cluster' :)
 
-## Checklist
-- [x] Linux OS installed on RPi5
-- [x] SSH access works
-- [x] Git repo cloned
-- [x] Ansible installed (with dependencies)
-- [x] K3s installed (with dependencies)
+### Level 2 (Install Helm, k9s, Portainer)
+1) ssh into your RPi 5
+2) run this script (you can run it multiple times, since it is idempotent):
+```bash
+cd ~/repos/homelab-rpi5-kubernetes/ansible/
+./2_k9s_helm_portainer_bootstrap.sh   ### this will install k9s and helm and portainer via Ansible
+```
+3) execute this command:
+```bash
+k9s   ### this should start the k9s TUI and connect to your cluster
+```
+4) in a web broswer on your local network, open the website: http://<ip_of_your_raspberry_pi>:9000
+.### this should open Portainer homepage
 
 ## Repo structure
 ```bash
@@ -75,7 +91,6 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 ```
 
 ## Coming soon
-- Kubernetes manager tool (Portainer)
 - Monitoring stack (Prometheus, Grafana)
 - Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
 - GitOps deployment with FluxCD

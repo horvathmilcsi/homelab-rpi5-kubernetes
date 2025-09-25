@@ -47,16 +47,7 @@
   args:
     executable: /bin/bash
   register: script_output
+  changed_when: "'no changes needed' not in script_output.stdout"
 
-###
-
-- name: Show full script output
-  debug:
-    msg: |
-      STDOUT:
-      {{ script_output.stdout }}
-
-      STDERR:
-      {{ script_output.stderr }}
 
 
