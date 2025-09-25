@@ -65,34 +65,44 @@ k9s   ### this should start the k9s TUI and connect to your cluster
 
 ## Repo structure
 ```bash
-:~/repos/homelab-rpi5-kubernetes $ tree  
-.  
-├── 1_bootstrap_linux  
-│   ├── 1_start_wsl_ubuntu.bat  
-│   └── 2_install_ansible.sh  
-├── ansible  
-│   ├── 9_start_ansible_bootstrap.sh  
-│   ├── ansible.cfg  
-│   ├── inventory  
-│   │   └── hosts.ini  
-│   ├── playbooks  
-│   │   └── bootstrap.yml  
-│   └── roles  
-│       ├── common  
-│       │   └── tasks  
-│       │       └── main.yml  
-│       ├── k3s  
-│       │   └── tasks  
-│       │       └── main.yml  
-│       └── set_replace_key_value  
-│           └── tasks  
-│               └── main.yml  
-└── README.md  
+~/repos/homelab-rpi5-kubernetes $ tree
+.
+├── 1_bootstrap_linux
+│   └── 2_install_ansible.sh
+├── ansible
+│   ├── 9_start_ansible_bootstrap.sh
+│   ├── ansible.cfg
+│   ├── inventory
+│   │   └── hosts.ini
+│   ├── playbooks
+│   │   └── bootstrap.yml
+│   └── roles
+│       ├── common
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── helm
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── k3s
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── portainer
+│       │   └── tasks
+│       │       └── main.yml
+│       └── set_replace_key_value
+│           └── tasks
+│               └── main.yml
+└── README.md
 ```
 
 ## Coming soon
-- Monitoring stack (Prometheus, Grafana)
+- Monitoring stack (Prometheus, Grafana or Netdata)
 - Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
-- GitOps deployment with FluxCD
+- GitOps deployment with FluxCD or ArgoCD
+- HA distributed volumes via Longhorn
+- Kubebuddy
+- Certmanager
+- Trivy
+- etc
 
 
