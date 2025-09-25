@@ -6,7 +6,7 @@ My kubernetes homelab for my Raspberry Pi 5
 1) Install Ansible on Rpi5 (with dependencies)
 2) Install K3S Kubernetes Rpi5 (via Ansible, with dependencies)
 
-## Level 2:
+### Level 2:
 3) Install Helm - a package manager (via Ansible, with dependenices)
 4) Install k9s - a Kubernetes TUI management tool (via Ansible)
 5) Install Portainer - a Kubernetes management tool (via Ansible)
@@ -28,7 +28,7 @@ git clone https://github.com/horvathmilcsi/homelab-rpi5-kubernetes.git
 cd homelab-rpi5-kubernetes/
 ./1_bootstrap_linux/2_install_ansible.sh   ### this will install Ansible
 cd ansible/
-./9_start_ansible_bootstrap.sh   ### this will perform a config on xxx.txt and then reboot your RPi 5
+./9_start_ansible_bootstrap.sh   ### this will perform a config on /boot/firmware/cmdline.txt and then reboot your RPi 5
 ```
 3) your RPi 5 will be rebooted (because of .txt changed) 
 4) after reboot, ssh into your RPi 5
