@@ -26,16 +26,16 @@ mkdir ~/repos/   ###  Create a new parent folder for this git repo
 cd ~/repos/
 git clone https://github.com/horvathmilcsi/homelab-rpi5-kubernetes.git
 cd homelab-rpi5-kubernetes/
-./1_bootstrap_linux/2_install_ansible.sh   ### this will install Ansible
-cd ansible/
-./9_start_ansible_bootstrap.sh   ### this will perform a config on /boot/firmware/cmdline.txt and then reboot your RPi 5
+./01-bootstrap-linux/01_install_ansible.sh   ### this will install Ansible
+cd 02-ansible/
+./01-bootstrap-k3s.sh   ### this will perform a config on /boot/firmware/cmdline.txt and then reboot your RPi 5
 ```
 3) your RPi 5 will be rebooted (because of .txt changed) 
 4) after reboot, ssh into your RPi 5
 5) run this script (you can run it multiple times, since it is idempotent):
-```bash
-cd ~/repos/homelab-rpi5-kubernetes/ansible/
-./9_start_ansible_bootstrap.sh   ### this will install k3s and all its dependencies and configs via Ansible
+```bash0
+cd ~/repos/homelab-rpi5-kubernetes/02-ansible/
+./01-bootstrap-k3s.sh   ### this will install k3s and all its dependencies and configs via Ansible
 ```
 6) execute this command:
 ```bash
@@ -53,46 +53,19 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 1) ssh into your RPi 5
 2) run this script (you can run it multiple times, since it is idempotent):
 ```bash
-cd ~/repos/homelab-rpi5-kubernetes/ansible/
-./2_k9s_helm_portainer_bootstrap.sh   ### this will install k9s and helm and portainer via Ansible
+cd ~/repos/homelab-rpi5-kubernetes/02-ansible/
+./02-install-helm-portainer-k9s.sh   ### this will install k9s and helm and portainer via Ansible
 ```
 3) execute this command:
 ```bash
 k9s   ### this should start the k9s TUI and connect to your cluster
 ```
-4) in a web broswer on your local network, open the website: http://<ip_of_your_raspberry_pi>:9000
+4) in a web broswer on your local network, open tis website:
+http://<ip_of_your_raspberry_pi>:9000
 .### this should open Portainer homepage
 
 ## Repo structure
 ```bash
-~/repos/homelab-rpi5-kubernetes $ tree
-.
-├── 1_bootstrap_linux
-│   └── 2_install_ansible.sh
-├── ansible
-│   ├── 9_start_ansible_bootstrap.sh
-│   ├── ansible.cfg
-│   ├── inventory
-│   │   └── hosts.ini
-│   ├── playbooks
-│   │   └── bootstrap.yml
-│   └── roles
-│       ├── common
-│       │   └── tasks
-│       │       └── main.yml
-│       ├── helm
-│       │   └── tasks
-│       │       └── main.yml
-│       ├── k3s
-│       │   └── tasks
-│       │       └── main.yml
-│       ├── portainer
-│       │   └── tasks
-│       │       └── main.yml
-│       └── set_replace_key_value
-│           └── tasks
-│               └── main.yml
-└── README.md
 ```
 
 ## Coming soon
