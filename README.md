@@ -102,7 +102,8 @@ this address should open Portainer homepage
 ```
 
 ## Coming soon
-- Monitoring stack (Prometheus, Grafana or Netdata)
+- expose the RPi5 cluster to public internet via Cloudflare Tunnel 
+- Monitoring stack (Prometheus, Grafana or Kube-Prometheus-Stack or Netdata)
 - Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
 - GitOps deployment with FluxCD or ArgoCD
 - HA distributed volumes via Longhorn
