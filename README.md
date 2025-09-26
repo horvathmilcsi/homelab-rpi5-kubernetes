@@ -9,7 +9,7 @@ My kubernetes homelab for my Raspberry Pi 5
 ### Level 2:
 3) Install Helm - a package manager (via Ansible, with dependenices)
 4) Install k9s - a Kubernetes TUI management tool (via Ansible)
-5) Install Portainer - a Kubernetes management tool (via Ansible)
+5) Install Portainer - a Kubernetes WebGUI management tool (via Ansible)
 
 ## Prerequisites  
 1) have an installed linux OS on your Raspberry Pi 5, with SSH access enabled
