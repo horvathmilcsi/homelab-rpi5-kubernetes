@@ -1,8 +1,17 @@
-- name: Download Helm install script
+- name: Check if Helm is already installed
+  stat:
+    path: /usr/local/bin/helm
+  register: helm_binary
+
+- name: Download Helm install script if Helm is not installed
   get_url:
     url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
     dest: /tmp/get_helm.sh
     mode: '0755'
+  when: not helm_binary.stat.exists
 
-- name: Run Helm install script
+- name: Run Helm install script if Helm is not installed
   command: /tmp/get_helm.sh
+#  environment:
+#    DESIRED_VERSION: v3.13.0  # Optional: specify version
+  when: not helm_binary.stat.exists

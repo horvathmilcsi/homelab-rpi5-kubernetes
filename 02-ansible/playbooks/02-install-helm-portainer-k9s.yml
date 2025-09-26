@@ -1,9 +1,10 @@
 - name: Bootstrap Raspberry Pi for k3s
   hosts: localhost
-  become: yes
-
   roles:
-    - helm     # Install Helm
-    - portainer # Install portainer (via Helm)
-    - k9s
-
+    - role: helm     # Install Helm for all users
+      become: yes
+    - role: portainer # Install portainer (via Helm) inside Kubernetes k3s
+      become: no
+    - role: k9s      # Install k9s for all users
+      become: yes
+ 
