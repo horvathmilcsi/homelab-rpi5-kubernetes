@@ -30,5 +30,3 @@
   roles:
     - common   # OS updates, install Midnight Commander
     - k3s      # Install k3s
-    - helm     # Install Helm
-    - portainer # Install portainer (via Helm)
