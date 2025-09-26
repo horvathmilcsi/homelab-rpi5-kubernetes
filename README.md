@@ -66,6 +66,39 @@ http://<ip_of_your_raspberry_pi>:9000
 
 ## Repo structure
 ```bash
+.
+├── 01-bootstrap-linux
+│   └── 01_install_ansible.sh
+├── 02-ansible
+│   ├── 01-bootstrap-k3s.sh
+│   ├── 02-install-helm-portainer-k9s.sh
+│   ├── ansible.cfg
+│   ├── inventory
+│   │   └── hosts.ini
+│   ├── playbooks
+│   │   ├── 01-bootstrap-k3s.yml
+│   │   └── 02-install-helm-portainer-k9s.yml
+│   └── roles
+│       ├── common
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── helm
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── k3s
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── k9s
+│       │   └── tasks
+│       │       └── main.yml
+│       ├── portainer
+│       │   └── tasks
+│       │       └── main.yml
+│       └── set_replace_key_value
+│           └── tasks
+│               └── main.yml
+└── README.md
+
 ```
 
 ## Coming soon
