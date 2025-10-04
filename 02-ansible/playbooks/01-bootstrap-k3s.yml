@@ -9,7 +9,9 @@
         cmdline_file: "/boot/firmware/cmdline.txt"
         original_keyword: "cgroup_memory"
         replacement_value: "cgroup_memory=1"
-      notify: Reboot if cmdline changed
+      notify: 
+        - Print reboot message
+        - Reboot if cmdline changed
 
     - name: Set or replace cgroup_enable=memory
       import_tasks: ../roles/set_replace_key_value/tasks/main.yml
@@ -17,12 +19,17 @@
         cmdline_file: "/boot/firmware/cmdline.txt"
         original_keyword: "cgroup_enable"
         replacement_value: "cgroup_enable=memory"
-      notify: Reboot if cmdline changed
+      notify:
+        - Print reboot message
+        - Reboot if cmdline changed
 
     - name: Flush handlers to reboot immediately if needed
       meta: flush_handlers
 
   handlers:
+    - name: Print reboot message
+      ansible.builtin.debug:
+        msg: "**** !!!! Rebooting due to /boot/firmware/cmdline.txt changes. After reboot run this script/playbook again to continue the install process"
     - name: Reboot if cmdline changed
       become: yes
       ansible.builtin.shell: "sleep 2 && shutdown -r now 'Rebooting due to /boot/firmware/cmdline.txt changes. After reboot run this script/playbook again to continue the install process'"
