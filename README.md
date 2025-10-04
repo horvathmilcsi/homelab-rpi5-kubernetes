@@ -60,7 +60,7 @@ cd ~/repos/homelab-rpi5-kubernetes/02-ansible/
 ```bash
 k9s   ### this should start the k9s TUI and connect to your cluster
 ```
-4) in a web broswer on your local network, open tis website:  
+4) in a web broswer on your local network, open this website:  
 http://<ip_of_your_raspberry_pi>:9000  
 this address should open Portainer homepage  
 
