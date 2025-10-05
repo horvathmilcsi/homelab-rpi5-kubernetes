@@ -1,4 +1,4 @@
-# homelab-rpi5-kubernetes
+# rpi5-kubernetes-homelab
 This project is about bootstrapping a Kubernetes homelab on Raspberry Pi 5 via idempotent shell scripts and ansible playbooks.
 
 ## Purpose  
@@ -24,8 +24,8 @@ sudo apt update  ### If at some point you will be asked to decide between Yes/No
 sudo apt -y install git
 mkdir ~/repos/   ###  Create a new parent folder for this git repo
 cd ~/repos/
-git clone https://github.com/horvathmilcsi/homelab-rpi5-kubernetes.git
-cd homelab-rpi5-kubernetes/
+git clone https://github.com/horvathmilcsi/rpi5-kubernetes-homelab.git
+cd rpi5-kubernetes-homelab/
 ./01-bootstrap-linux/01_install_ansible.sh   ### this will install Ansible
 cd 02-ansible/
 ./01-bootstrap-k3s.sh   ### this will perform a config on /boot/firmware/cmdline.txt and then reboot your RPi 5
@@ -34,7 +34,7 @@ cd 02-ansible/
 4) after reboot, ssh into your RPi 5
 5) run this script (you can run it multiple times, since it is idempotent):
 ```bash0
-cd ~/repos/homelab-rpi5-kubernetes/02-ansible/
+cd ~/repos/rpi5-kubernetes-homelab/02-ansible/
 ./01-bootstrap-k3s.sh   ### this will install k3s and all its dependencies and configs via Ansible
 ```
 6) execute this command:
@@ -53,7 +53,7 @@ raspberrypi-0   Ready    control-plane,master   17s   v1.33.4+k3s1
 1) ssh into your RPi 5
 2) run this script (you can run it multiple times, since it is idempotent):
 ```bash
-cd ~/repos/homelab-rpi5-kubernetes/02-ansible/
+cd ~/repos/rpi5-kubernetes-homelab/02-ansible/
 ./02-install-helm-portainer-k9s.sh   ### this will install k9s and helm and portainer via Ansible
 ```
 3) execute this command:
@@ -102,6 +102,7 @@ this address should open Portainer homepage
 ```
 
 ## Coming soon
+- install kubens (Kubernetes namespace tool)
 - expose the RPi5 cluster to public internet via Cloudflare Tunnel 
 - Monitoring stack (Prometheus, Grafana or Kube-Prometheus-Stack or Netdata)
 - Secrets management via Kubernetes Secrets Store CSI Driver and Google Secret Manager
