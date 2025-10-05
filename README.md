@@ -1,5 +1,5 @@
 # homelab-rpi5-kubernetes
-My kubernetes homelab for my Raspberry Pi 5
+This project is about bootstrapping a Kubernetes homelab on Raspberry Pi 5 via idempotent shell scripts and ansible playbooks.
 
 ## Purpose  
 ### Level 1:
